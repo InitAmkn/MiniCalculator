@@ -1,5 +1,5 @@
-public class InvalidOperationException extends Exception {
-    InvalidOperationException(String message){
+public class InvalidArgumentsException extends Exception {
+    InvalidArgumentsException(String message){
         super(message);
     }
 }
