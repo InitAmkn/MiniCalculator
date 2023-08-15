@@ -4,18 +4,28 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         String input = "";
-        Command command = new Command();
-        Parser parser;
 
-        System.out.println(OperationsEnum.getAllShortNames());
+        Parser parser;
+        History history = new History();
         while (!input.equalsIgnoreCase("exit")) {
+            System.out.println("Введите операцию ");
             input = scanner.nextLine();
 
-            parser = new Parser(input);
-            double result = command.execute(parser.getNumberOne(),
-                    parser.getNumberTwo(), parser.getOperation());
-            System.out.println(parser.getNumberOne() + " " + parser.getOperation() + " " + parser.getNumberTwo() + " = " + result);
+            try {
+                parser = new Parser(input);
 
+                Command command = new Command(parser.getNumberOne(),
+                        parser.getNumberTwo(), parser.getOperation());
+                history.save(command);
+                System.out.println(history);
+                System.out.println(command);
+
+            } catch (InvalidOperationException |
+                     InvalidArgumentsException |
+                     NumberFormatException |
+                     ArithmeticException e) {
+                System.out.println(e.getMessage());
+            }
         }
     }
 }
