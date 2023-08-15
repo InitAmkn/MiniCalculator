@@ -5,14 +5,13 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         String input = "";
 
-        Parser parser;
         History history = new History();
         while (!input.equalsIgnoreCase("exit")) {
             System.out.println("Введите операцию ");
             input = scanner.nextLine();
 
             try {
-                parser = new Parser(input);
+                Parser parser = new Parser(input);
 
                 Command command = new Command(parser.getNumberOne(),
                         parser.getNumberTwo(), parser.getOperation());
@@ -27,5 +26,6 @@ public class Main {
                 System.out.println(e.getMessage());
             }
         }
+        scanner.close();
     }
 }
